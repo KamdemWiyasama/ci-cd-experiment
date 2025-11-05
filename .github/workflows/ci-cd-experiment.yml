@@ -1,0 +1,23 @@
+name: Python CI - Baseline
+
+on: [push]
+
+jobs:
+  baseline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          pip install -r package1/requirements.txt
+          pip install -r package2/requirements.txt
+          pip install -r package3/requirements.txt
+      - name: Run tests
+        run: |
+          pytest package1/tests
+          pytest package2/tests
+          pytest package3/tests

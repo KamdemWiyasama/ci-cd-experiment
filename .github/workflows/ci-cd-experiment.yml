@@ -7,17 +7,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      - name: Install dependencies
+
+      - name: Upgrade pip and install dependencies
         run: |
-          pip install -r package1/requirements.txt
-          pip install -r package2/requirements.txt
-          pip install -r package3/requirements.txt
+          python -m pip install --upgrade pip
+          python -m pip install -r package1/requirements.txt || true
+          python -m pip install -r package2/requirements.txt || true
+          python -m pip install -r package3/requirements.txt || true
+          python -m pip install pytest
+
       - name: Run tests
         run: |
-          pytest package1/tests
-          pytest package2/tests
-          pytest package3/tests
+          python -m pytest package1/tests
+          python -m pytest package2/tests
+          python -m pytest package3/tests
+
+

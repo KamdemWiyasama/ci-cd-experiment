@@ -1,12 +1,9 @@
-from package2 import scientific
+import math
 
-ITERATIONS = 1_000_000
+def power(a, b):
+    """Returns a to the power of b."""
+    return a ** b
 
-def test_power():
-    for _ in range(ITERATIONS):
-        assert scientific.power(2, 3) == 8
-
-def test_square_root():
-    for _ in range(ITERATIONS):
-        assert scientific.square_root(16) == 4
-
+def square_root(a):
+    """Returns the square root of a number."""
+    return math.sqrt(a)

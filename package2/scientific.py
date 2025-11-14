@@ -1,9 +1,12 @@
-import math
+from package2 import scientific
 
-def power(a, b):
-    return math.pow(a, b)
+ITERATIONS = 1_000_000
 
-def square_root(a):
-    if a < 0:
-        raise ValueError("Cannot take square root of negative number.")
-    return math.sqrt(a)
+def test_power():
+    for _ in range(ITERATIONS):
+        assert scientific.power(2, 3) == 8
+
+def test_square_root():
+    for _ in range(ITERATIONS):
+        assert scientific.square_root(16) == 4
+

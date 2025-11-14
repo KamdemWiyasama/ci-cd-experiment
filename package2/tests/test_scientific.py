@@ -1,4 +1,4 @@
-from package2.tests import scientific
+from package2 import scientific
 
 ITERATIONS = 1_000_000
 

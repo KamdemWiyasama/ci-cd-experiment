@@ -13,7 +13,8 @@ jobs:
         with:
           python-version: '3.11'
 
-      
+      - name: Simulate heavy dependency installation (realistic delay)
+        run: sleep 38
           
       #baseline dependencies
       - name: Upgrade pip and install dependencies
@@ -29,25 +30,7 @@ jobs:
           python -m pytest package1/tests
           python -m pytest package2/tests
           python -m pytest package3/tests
-  containerized-caching:
-    runs-on: ubuntu-latest
-    needs: baseline 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      
-      - name: Cache pip
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-container-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: ${{ runner.os }}-pip-container-
-      - name: Build Docker image
-        run: docker build -t ci-cd-calc .
-
-      - name: Run tests inside container
-        run: docker run ci-cd-calc
-
+  
 
  
           

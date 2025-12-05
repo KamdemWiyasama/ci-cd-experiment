@@ -29,12 +29,19 @@ jobs:
           python -m pytest package1/tests
           python -m pytest package2/tests
           python -m pytest package3/tests
-  containerized:
+  containerized-caching:
     runs-on: ubuntu-latest
+    needs: baseline 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
+      
+      - name: Cache pip
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-container-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-container-
       - name: Build Docker image
         run: docker build -t ci-cd-calc .
 
